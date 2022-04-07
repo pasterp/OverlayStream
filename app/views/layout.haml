@@ -1,0 +1,13 @@
+!!!5
+%html
+  %head
+    %title= @title || 'Layout Ruby App'
+
+    %link(rel="stylesheet" href="sass/base.css")
+    
+
+  %body
+    #content
+      = yield
+    %footer
+      = haml :footer
