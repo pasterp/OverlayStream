@@ -1,0 +1,15 @@
+%p 
+  %img#Image{:src => "data:#{@music_image.first};base64, #{@music_image.last}"}
+  %span.code#Title
+    = @music_title + " by " + @music_artist
+  
+  :javascript
+    var es = new EventSource('/stream');
+    var music_label = document.getElementById('Title')
+    var music_image = document.getElementById('Image')
+    es.onmessage = function(e){
+      console.log(e.data);
+      data = JSON.parse(e.data);
+      music_label.innerHTML = data.title;
+      music_image.src = "data:" + data.image_type + ";base64, " + data.image
+    }
